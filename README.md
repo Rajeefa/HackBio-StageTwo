@@ -11,30 +11,48 @@ It includes following steps:
     Clustering
     Marker gene detection and visualization
 ## Installation of Dependencies 
- Scanpy
+Scanpy
+ 
     !pip install scanpy
- anndata
+    
+anndata
+ 
      !pip install anndata
- igraph
+     
+igraph
+ 
      !pip install igraph
- celltypist
+ 
+celltypist
+     
      !pip install celltypist
- decoupler
+
+decoupler
+ 
     !pip install decoupler
- fa2-modified
+ 
+fa2-modified
+ 
      !pip install fa2-modified
      
  ## 🧩 Loading Data
 The single-cell expression matrix is loaded into an AnnData object — the core data structure in Scanpy. It contains:
+
 adata.X: the expression matrix (cells × genes)
+
 adata.obs: metadata for each cell
+
 adata.var: metadata for each gene
 
 ## 🧹 Quality Control (QC)
 QC ensures only high-quality cells and informative genes are kept. Typical filters remove:
+
 Harmonize unique gene names (avoid gene duplications from old pipelines)
+
 Cells with too few genes (likely dead)
+
 Cells with too many genes (possible doublets)
+
 Genes expressed in very few cells (uninformative)
 
 ## ⚖️ Normalization
@@ -44,8 +62,11 @@ Normalization adjusts for sequencing depth differences between cells. Here, we s
 
 Principal Component Analysis (PCA) is used to reduce data complexity and highlight key variation patterns. This makes later steps like clustering and visualization faster and more robust.
 In single-cell RNA-seq, each cell has expression values for thousands of genes, creating a huge, noisy matrix. PCA compresses this high-dimensional data into a smaller set of features (typically 30–50 components) that summarize the key biological and technical variation across cells.
+ 
  Noise reduction: scRNA-seq data are sparse and noisy. PCA focuses on the strongest correlated gene expression patterns, discarding random noise.
+ 
  Computational efficiency: Downstream analyses like clustering, UMAP, or t-SNE run much faster and more robustly on 30 PCs than on 20,000 genes.
+ 
  Signal extraction: The top PCs often correspond to meaningful biological structure—cell type, cell cycle state, or activation level—while later PCs capture less relevant variation.
     
 ## Clustering by communities.
